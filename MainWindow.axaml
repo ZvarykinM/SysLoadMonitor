@@ -1,0 +1,45 @@
+<Window 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+    xmlns:avaloniaSample="clr-namespace:AvaloniaSample"
+    x:Class="AvaloniaSample.MainWindow"
+    x:DataType="avaloniaSample:MainWindow"
+    Height="1000" Width="1600"
+    >
+
+    <Grid ColumnDefinitions="600, 1000">
+        <!-- <Button Grid.Column="0" HorizontalAlignment="Stretch">Button1</Button> -->
+        <Grid Name="GridForTable" RowDefinitions="30, 600, 30" Grid.Column="0">
+        <StackPanel Orientation="Horizontal">
+            <TextBox Name="PIDTextBox" Width="450" Watermark="ProcessID"/>
+            <Button Name="Knopka" Grid.Row="0" Width="150" Click="KillProcess">Kill Process</Button>
+        </StackPanel>    
+       <ScrollViewer Name="ScrlViewer" Grid.Row="1">
+            <ListBox Name="LBox" Background="Green">
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="1"/>
+                    </Style>
+                </ListBox.Styles>
+            </ListBox>
+        </ScrollViewer>
+        <StackPanel Grid.Row = "2">
+            <TextBlock Name="AmountOfProcessesInfoTextBox"/>
+        </StackPanel>
+    </Grid>
+        <Grid RowDefinitions="500, 500" Grid.Column="1">
+            <lvc:CartesianChart Name = "Plot0" Grid.Row="0" SyncContext="{Binding SyncProc}"
+                    Series="{Binding SeriesProc}"
+                    XAxes="{Binding ProcXAxes}"
+                    LegendTextPaint="{Binding ProcLegendTextPaint}"
+                    LegendPosition="Top"/>
+            <lvc:CartesianChart Name = "Plot1" Grid.Row="1" SyncContext="{Binding SyncMem}"
+                    Series="{Binding SeriesMem}"
+                    XAxes="{Binding MemXAxes}"
+                    LegendTextPaint="{Binding MemLegendTextPaint}"
+                    LegendPosition="Top"
+                    LegendTextSize="14"/>   
+        </Grid>
+    </Grid>
+</Window>  
